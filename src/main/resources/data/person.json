@@ -1,0 +1,28 @@
+{
+  "personList": [
+    {
+      "id": 1,
+      "name": "Bhesh",
+      "address": "5881 Vista Dr",
+      "email": "bsejawal@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Rajiv",
+      "address": "5881 Vista Dr",
+      "email": "rajiv.neupane@gmail.com"
+    },
+    {
+      "id": 3,
+      "name": "Dipen",
+      "address": "Vista Dr #820",
+      "email": "dipen.awasthi@gmail.com"
+    },
+    {
+      "id": 4,
+      "name": "Sandeep",
+      "address": "#820",
+      "email": "sandeep.pantha@gmail.com"
+    }
+  ]
+}
