@@ -21,9 +21,13 @@ public class PersonResource {
         this.personRepository = personRepository;
     }
 
+    @GetMapping(value = "/status")
+    public String status(){
+        System.out.println("called /status");
+        return "if you see this the app is working fine, celebrate!!";
+    }
     @GetMapping(value = "/persons")
     public List<Person> all(){
-        System.out.println("PersonResource.all => change test : 0");
         return (List<Person>) personRepository.findAll();
     }
     @GetMapping(value = "/persons/{id}")
