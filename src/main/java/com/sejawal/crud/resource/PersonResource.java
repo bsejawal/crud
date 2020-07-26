@@ -13,8 +13,7 @@ public class PersonResource {
 
     @Autowired
     PersonService personService;
-    // this example's reference is
-//https://spring.io/guides/tutorials/bookmarks/
+
     private final PersonRepository personRepository;
 
     PersonResource(PersonRepository personRepository){
@@ -35,11 +34,6 @@ public class PersonResource {
         return personRepository.findById(id).orElse(null);
     }
 
-    //person?name=bhesh
-//    @GetMapping(value = "/persons/{name}")
-//    public Person person(@RequestParam(value="name") String name){
-//        return personRepository.findByName(name).orElse(null);
-//    }
     @PutMapping(value = "/persons/{id}")
     public Person replacePerson(@RequestBody Person newPerson, @PathVariable(value = "id") Long id){
         return personRepository.findById(id)
