@@ -5,37 +5,37 @@ phases:
     commands:
       - apt-get update -y
       - apt-get install -y software-properties-common
-			- add-apt-repository ppa:openjdk-r/ppa
-			- apt-get update -y
-			- apt-get install -y openjdk-8-jdk
-			- apt-get install -y maven
-	pre_build:
-		commands:
-			- echo "java application build"
-			- aws --version
-			- echo logging to AWS ECR $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-			- REPOSITORY_URI=ECR_REPO_URL
-			- COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | CUT -c 1-7)
-			- IMAGE_TAG=build-(echo CODEBUILD_ID | awk -F":" {print $2})
-	build:
-		commands:
-			- echo Build started on `date`
-			- echo Creating artifacts
-			- mvn clean package
-			- echo Building the Docker image...
-			- docker build -t $REPOSITORY_URI:latest
-			- docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-	post_build:
-		commands:
-			- echo Build complated on `date`
-			- echo Pushing the Docker image
-			- docker push $REPOSITORY_URI:latest
-			- docker push $REPOSITORY_URI:IMAGE_TAG
-			- echo Writing image definition file..
-			- printf '[{"name":"spring_boot_test_app", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefination.json
-			- cat imagedefination.json
-	artifacts:
-		files: 
-			- imagedefination.json
-			- target/crud.jar
-		discard-path: yes
+      - add-apt-repository ppa:openjdk-r/ppa
+      - apt-get update -y
+      - apt-get install -y openjdk-8-jdk
+      - apt-get install -y maven
+  pre_build:
+    commands:
+      - echo "java application build"
+      - aws --version
+      - echo logging to AWS ECR $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=ECR_REPO_URL
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | CUT -c 1-7)
+      - IMAGE_TAG=build-(echo CODEBUILD_ID | awk -F":" {print $2})
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Creating artifacts
+      - mvn clean package
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build complated on `date`
+      - echo Pushing the Docker image
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:IMAGE_TAG
+      - echo Writing image definition file..
+      - printf '[{"name":"spring_boot_test_app", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefination.json
+      - cat imagedefination.json
+  artifacts:
+    files:
+      - imagedefination.json
+      - target/crud.jar
+    discard-path: yes
