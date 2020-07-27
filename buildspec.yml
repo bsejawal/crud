@@ -9,8 +9,9 @@ phases:
       - echo "java application build"
       - aws --version
       - echo logging to AWS ECR $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - echo ECR_REPOSITORY_URL = $ECR_REPOSITORY_URL
-      - REPOSITORY_URI=$ECR_REPOSITORY_URL
+      - echo ecr repository URL $ECR_REPOSITORY_URL
+      - echo printing CODEBUILD_RESOLVED_SOURCE_VERSION =  $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo pringint CODEBUILD_BUILD_ID = $CODEBUILD_BUILD_ID
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-(echo $CODEBUILD_BUILD_ID | awk -F":" {print $2})
   build:
@@ -19,14 +20,14 @@ phases:
       - echo Creating artifacts
       - mvn clean package
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t $ECR_REPOSITORY_URL:latest
+      - docker tag $ECR_REPOSITORY_URL:latest $ECR_REPOSITORY_URL:$IMAGE_TAG
   post_build:
     commands:
       - echo Build complated on `date`
       - echo Pushing the Docker image
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:IMAGE_TAG
+      - docker push $ECR_REPOSITORY_URL:latest
+      - docker push $ECR_REPOSITORY_URL:IMAGE_TAG
       - echo Writing image definition file..
-      - printf '[{"name":"spring_boot_test_app", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefination.json
+      - printf '[{"name":"spring_boot_test_app", "imageUri":"%s"}]' $ECR_REPOSITORY_URL:$IMAGE_TAG > imagedefination.json
       - cat imagedefination.json
