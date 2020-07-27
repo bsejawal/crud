@@ -1,10 +1,9 @@
 version: 0.2
 
 phases:
-	 install:
-   	runtime-versions:
-    	docker: 18
-			
+  install:
+    runtime-versions:
+      docker: 18
   pre_build:
     commands:
       - echo "java application build"
@@ -30,3 +29,9 @@ phases:
       - echo Writing image definition file..
       - printf '[{"name":"spring_boot_test_app", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefination.json
       - cat imagedefination.json
+      
+  artifacts:
+    files:
+      - imagedefination.json
+      - target/crud.jar
+    discard-path: yes
