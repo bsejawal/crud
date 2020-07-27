@@ -11,9 +11,11 @@ phases:
       - echo logging to AWS ECR $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - echo ecr repository URL $ECR_REPOSITORY_URL
       - echo printing CODEBUILD_RESOLVED_SOURCE_VERSION =  $CODEBUILD_RESOLVED_SOURCE_VERSION
-      - echo pringint CODEBUILD_BUILD_ID = $CODEBUILD_BUILD_ID
+      - echo pringing CODEBUILD_BUILD_ID = $CODEBUILD_BUILD_ID
+      - echo printing CODEBUILD_RESOLVED_SOURCE_VERSION = $CODEBUILD_RESOLVED_SOURCE_VERSION
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=build-(echo $CODEBUILD_BUILD_ID | awk -F":" {print $2})
+      - echo code commit hash = $COMMIT_HASH
+      - IMAGE_TAG=build-(echo $CODEBUILD_BUILD_ID | awk -f":" {print $2})
   build:
     commands:
       - echo Build started on `date`
