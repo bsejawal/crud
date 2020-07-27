@@ -29,9 +29,3 @@ phases:
       - echo Writing image definition file..
       - printf '[{"name":"spring_boot_test_app", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefination.json
       - cat imagedefination.json
-      
-  artifacts:
-    files:
-      - imagedefination.json
-      - target/crud.jar
-    discard-path: yes
