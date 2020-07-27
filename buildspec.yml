@@ -23,7 +23,7 @@ phases:
       - echo Creating artifacts
       - mvn clean package
       - echo Building the Docker image...
-      - docker build -t $ECR_REPOSITORY_URL:latest
+      - docker build -t $ECR_REPOSITORY_URL .
       - docker tag $ECR_REPOSITORY_URL:latest $ECR_REPOSITORY_URL:$IMAGE_TAG
   post_build:
     commands:
