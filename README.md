@@ -7,7 +7,7 @@ spring boot crud with h2(in memory database)
 ### To Get All Person
 `` /persons `` **GET** method <br />
 Request:<br />
-`` No need request body ``<br/>
+`` No need request body ``<br />
 Response:
 ```
 [
