@@ -9,7 +9,7 @@ phases:
       - echo "java application build"
       - aws --version
       - echo logging to AWS ECR 
-      - aws ecr get-login --region --no-include-email $AWS_DEFAULT_REGION
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - echo ecr repository URL $ECR_REPOSITORY_URL
       - echo printing CODEBUILD_RESOLVED_SOURCE_VERSION =  $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo pringing CODEBUILD_BUILD_ID = $CODEBUILD_BUILD_ID
