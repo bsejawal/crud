@@ -1,4 +1,4 @@
-package com.sejawal.crud.resource;
+package com.sejawal.crud.controller;
 
 import com.sejawal.crud.model.Person;
 import com.sejawal.crud.repository.PersonRepository;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class PersonResource {
+public class PersonController {
 
     @Autowired
     PersonService personService;
 
     private final PersonRepository personRepository;
 
-    PersonResource(PersonRepository personRepository){
+    PersonController(PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
