@@ -1,0 +1,16 @@
+{
+  "userList": [
+    {
+      "userName": "user",
+      "password": "pass",
+      "active": true,
+      "roles": "ROLE_USER"
+    },
+    {
+      "userName": "admin",
+      "password": "pass",
+      "active": true,
+      "roles": "ROLE_ADMIN"
+    }
+  ]
+}
