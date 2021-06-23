@@ -21,9 +21,7 @@ public class CrudApplication {
 	}
 	@Bean
 	CommandLineRunner init (UserRepository userRepository){
-		System.out.println("Hello Worldsssss");
 		return args -> {
-			System.out.println("Here ------>>>");
 			List<User> users= DataUtils.users();
 			System.out.println(users.size() );
 			System.out.println(users);
