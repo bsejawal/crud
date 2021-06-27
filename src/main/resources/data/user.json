@@ -11,6 +11,12 @@
       "password": "pass",
       "active": true,
       "roles": "ROLE_ADMIN"
+    },
+    {
+      "userName": "foo",
+      "password": "foo",
+      "active": true,
+      "roles": "ROLE_ADMIN"
     }
   ]
 }

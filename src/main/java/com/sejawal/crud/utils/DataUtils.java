@@ -1,9 +1,10 @@
+
 package com.sejawal.crud.utils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sejawal.crud.model.User;
-import com.sejawal.crud.vo.PersonList;
+//import com.sejawal.crud.vo.PersononList;
 import com.sejawal.crud.vo.UserList;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class DataUtils {
+    /*
 //    public static List<Person> persons(){
 //        ObjectMapper mapper = new ObjectMapper();
 //        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -36,7 +38,7 @@ public class DataUtils {
 
 //    }
 
-
+*/
     public static List<User> users(){
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -52,3 +54,4 @@ public class DataUtils {
         return userList.getUserList();
     }
 }
+

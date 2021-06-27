@@ -1,3 +1,68 @@
+
+package com.sejawal.crud.service;
+
+import com.sejawal.crud.model.User;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MyUserDetails{
+    private String userName;
+    private String password;
+    private boolean active;
+    private List<String> authorities;
+
+    public MyUserDetails(User user){
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.active = user.isActive();
+        this.authorities = Arrays.stream(user.getRoles().split(","))
+                .map(String::new)
+                .collect(Collectors.toList());
+
+    }
+    public MyUserDetails(){
+    }
+
+    public Collection<String> getAuthorities() {
+        return authorities;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+
+    public String getUsername() {
+        return userName;
+    }
+
+
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public boolean isEnabled() {
+        return active;
+    }
+}
+
+
+
+/*
 package com.sejawal.crud.service;
 
 import com.sejawal.crud.model.User;
@@ -63,3 +128,4 @@ public class MyUserDetails implements UserDetails {
         return active;
     }
 }
+*/

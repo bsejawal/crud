@@ -1,3 +1,4 @@
+/*
 package com.sejawal.crud.utils;
 
 import io.jsonwebtoken.Claims;
@@ -14,6 +15,8 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
     private final String SECRET_KEY="secret";
+    private final int ten_hours= 1000 * 60 * 60 * 10; // 10 hours
+    private final int ten_seconds= 1000 * 10;// 10 second
 
     public String extractUserName(String token){
         return extractClaim(token, Claims::getSubject);
@@ -45,7 +48,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+ 10000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis()+ ten_seconds))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
     public Boolean validateToken(String token, UserDetails userDetails){
@@ -54,3 +57,4 @@ public class JwtUtil {
     }
 
 }
+*/
