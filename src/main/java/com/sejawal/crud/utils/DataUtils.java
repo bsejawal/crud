@@ -40,18 +40,26 @@ public class DataUtils {
 
 */
     public static List<User> users(){
+        return ((UserList)readJsonFileAndMapToObject("data"+File.separator+"user.json", UserList.class)).getUserList();
+    }
+
+    public static User user(){
+        return ((UserList)readJsonFileAndMapToObject("data"+File.separator+"user.json", UserList.class)).getUserList().get(0);
+    }
+
+    private static <T> T readJsonFileAndMapToObject(String filePath, Class<T> element){
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        UserList userList = null;
-
+        T t = null;
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        try(InputStream input = loader.getResourceAsStream("data"+File.separator+"user.json")){
-            userList = mapper.readValue(input, UserList.class);
+        try(InputStream input = loader.getResourceAsStream(filePath)){
+            t =  mapper.readValue(input, element);
 
         }catch (IOException e){
             e.printStackTrace();
         }
-        return userList.getUserList();
+        return t;
     }
+
 }
 

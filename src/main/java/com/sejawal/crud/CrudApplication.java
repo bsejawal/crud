@@ -16,9 +16,12 @@ public class CrudApplication {
 
 	@Bean
 	CommandLineRunner init (UserRepository userRepository){
-		return args -> {
-			DataUtils.users().forEach(user -> userRepository.save(user));
-		};
+		if(0 == userRepository.count()) {
+			return args -> {
+				DataUtils.users().forEach(user -> userRepository.save(user));
+			};
+		}
+		return null;
 	}
 
 }
