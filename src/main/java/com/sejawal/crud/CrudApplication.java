@@ -1,7 +1,7 @@
 package com.sejawal.crud;
 
-import com.sejawal.crud.model.Person;
-import com.sejawal.crud.repository.PersonRepository;
+import com.sejawal.crud.model.User;
+import com.sejawal.crud.repository.UserRepository;
 import com.sejawal.crud.utils.DataUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class CrudApplication {
@@ -22,10 +22,10 @@ public class CrudApplication {
 	}
 
 	@Bean
-	CommandLineRunner init (PersonRepository personRepository){
+	CommandLineRunner init (UserRepository userRepository){
 		return args -> {
-			List<Person> persons=DataUtils.persons();
-			persons.forEach(person -> personRepository.save(person));
+			Set<User> users =DataUtils.users();
+			users.forEach(user -> userRepository.save(user));
 		};
 	}
 

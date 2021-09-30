@@ -5,7 +5,7 @@ spring boot crud with h2(in memory database)
 
 
 ### To Get All Person
-`` /persons `` **GET** method <br />
+`` /users `` **GET** method <br />
 Request:<br />
 `` No need request body ``<br />
 Response:
@@ -39,7 +39,7 @@ Response:
 ```
 
 ### To get a single Person
-`` /person/{id}`` **GET** method<br />
+`` /user/{id}`` **GET** method<br />
 Response:<br />
 `` No need Request Body `` <br />
 Response:
@@ -54,7 +54,7 @@ Response:
 
 
 ### To Create a Person
-`` /person `` **POST** method<br />
+`` /user `` **POST** method<br />
 request:
 ```
 {
@@ -75,7 +75,7 @@ Response:
 ```
 
 ### To Update Person
-`` /person/{id} `` **PUT** method <br />
+`` /user/{id} `` **PUT** method <br />
 Request:
 ```
 {
@@ -96,7 +96,7 @@ Response:
 ```
 
 ### To Delete Person
-`` /person/{id} `` **DELETE** method<br />
+`` /user/{id} `` **DELETE** method<br />
 ```
 Response code should be 200
 ```
