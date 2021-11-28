@@ -1,0 +1,24 @@
+{
+  "postDtoSet": [
+    {
+    "title": "My first Post ",
+    "description": "Post first Description",
+    "content": "This is my first post content"
+  },
+    {
+      "title": "My second Post",
+      "description": "Post second Description",
+      "content": "This is my second post content"
+    },
+    {
+      "title": "My third Post",
+      "description": "Post third Description",
+      "content": "This is my third post content"
+    },
+    {
+      "title": "My fourth Post",
+      "description": "Post fourth Description",
+      "content": "This is my fourth post content"
+    }
+  ]
+}

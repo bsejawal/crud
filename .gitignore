@@ -21,3 +21,5 @@ target/
 *.ipr
 
 *.db
+
+*jpb/
