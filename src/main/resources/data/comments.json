@@ -1,0 +1,16 @@
+{
+  "postId": 1,
+  "commentDtoSet": [
+    {
+      "name": "Bhesh Sejawal",
+      "email": "bsejawal@gmail.com",
+      "body": "Nice Post , I like it!!"
+    },
+    {
+      "name": "Evaan Sejawal",
+      "email": "esejawal@gmail.com",
+      "body": "Nice Post 1, I like it!!"
+    }
+
+  ]
+}

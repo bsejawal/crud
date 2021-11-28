@@ -1,7 +1,10 @@
 package com.sejawal.crud;
 
 import com.sejawal.crud.entity.Post;
+import com.sejawal.crud.payload.CommentDto;
+import com.sejawal.crud.payload.CommentDtoSet;
 import com.sejawal.crud.payload.PostDto;
+import com.sejawal.crud.service.CommentService;
 import com.sejawal.crud.service.PostService;
 import com.sejawal.crud.utils.DataUtils;
 import org.springframework.boot.CommandLineRunner;
@@ -20,10 +23,12 @@ public class CrudApplication {
 	}
 
 	@Bean
-	CommandLineRunner init (PostService postService){
+	CommandLineRunner init (PostService postService, CommentService commentService){
 		return args -> {
 			Set<PostDto> posts = DataUtils.posts();
 			posts.forEach(postDto -> postService.createPost(postDto));
+			CommentDtoSet comments = DataUtils.comments();
+			comments.getCommentDtoSet().forEach(commentDto -> commentService.createComment(comments.getPostId(),commentDto));
 		};
 	}
 }
