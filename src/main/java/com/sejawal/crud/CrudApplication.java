@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.modelmapper.ModelMapper;
 
 import java.util.Set;
 
@@ -30,5 +31,10 @@ public class CrudApplication {
 			CommentDtoSet comments = DataUtils.comments();
 			comments.getCommentDtoSet().forEach(commentDto -> commentService.createComment(comments.getPostId(),commentDto));
 		};
+	}
+
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
 	}
 }
