@@ -1,0 +1,22 @@
+{
+  "userDtoSet": [
+    {
+      "username": "user",
+      "password": "pass",
+      "email": "user@gmail.com",
+      "active": true
+    },
+    {
+      "username": "admin",
+      "password": "pass",
+      "email": "admin@gmail.com",
+      "active": true
+    },
+    {
+      "username": "super",
+      "password": "pass",
+      "email": "superadmin@gmail.com",
+      "active": true
+    }
+  ]
+}
