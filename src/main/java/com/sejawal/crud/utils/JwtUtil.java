@@ -13,6 +13,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
+
+    private final int EXPIRATION_MINUTE = 1; // minutes
     private final String SECRET_KEY="secret";
 
     public String extractUserName(String token){
@@ -45,7 +47,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+ 10000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis()+ 10000 * 60 * EXPIRATION_MINUTE))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
     public Boolean validateToken(String token, UserDetails userDetails){

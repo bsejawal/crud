@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,5 +22,3 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     private LocalDateTime updated;
 }
-
-//https://stackoverflow.com/questions/49954812/how-can-you-make-a-created-at-column-generate-the-creation-date-time-automatical

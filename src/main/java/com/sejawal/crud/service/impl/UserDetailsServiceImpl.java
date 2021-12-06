@@ -1,5 +1,6 @@
 package com.sejawal.crud.service.impl;
 
+import com.sejawal.crud.entity.um.MyUserDetails;
 import com.sejawal.crud.entity.um.User;
 import com.sejawal.crud.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,8 +21,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         Optional<User> user = userRepository.findByUsername(username);
         user.orElseThrow(()->new UsernameNotFoundException("Username not found :"+username));
-        return null;
+        UserDetails userDetails = user.map(MyUserDetails::new).get();
+        System.out.println("userDetails = " + userDetails);
+        return userDetails;
     }
 }

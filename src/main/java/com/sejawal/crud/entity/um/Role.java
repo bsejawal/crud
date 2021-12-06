@@ -7,13 +7,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@ToString
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(callSuper = true)
 @Table(
         name = "roles",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})

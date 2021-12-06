@@ -7,11 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.Date;
+
 
 @RestController
 
@@ -28,15 +30,19 @@ public class AuthenticateController {
         this.userDetailsService = userDetailsService;
     }
 
-//    @PostMapping("/authenticate")
-    @GetMapping("/authenticate")
-//    public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
-    public ResponseEntity<AuthenticateResponse> authenticate() throws Exception{
-//        try{
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
-//        }catch(BadCredentialsException e){
-//            throw new Exception("Incorrect username or password", e);
-//        }
-        return ResponseEntity.ok(new AuthenticateResponse("JWT"));
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
+        System.out.println("future Time -> "+ new Date(System.currentTimeMillis()+ (10000 * 60 * 60 * 10)));
+        System.out.println("Current Time -> "+ new Date( System.currentTimeMillis()));
+
+        System.out.println("authenticationRequest = " + authenticationRequest);
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+        }catch(BadCredentialsException e){
+            throw new Exception("Incorrect username or password", e);
+        }
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final String jwt = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthenticateResponse(jwt));
     }
 }
