@@ -23,7 +23,7 @@ public class PersonResource {
     @GetMapping(value = "/status")
     public String status(){
         System.out.println("called /status");
-        return "if you see this the app is working fine, celebrate!!";
+        return "if you see this, the app is running, celebrate!!";
     }
     @GetMapping(value = "/persons")
     public List<Person> all(){

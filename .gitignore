@@ -19,3 +19,13 @@ target/
 *.iws
 *.iml
 *.ipr
+
+.gradle
+gradle*
+**/build/
+!src/**/build/
+gradle-app.setting
+!gradle-wrapper.properties
+.gradletasknamecache
+.project
+.classpath

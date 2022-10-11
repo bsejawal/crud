@@ -12,6 +12,7 @@ import java.util.List;
 
 public class DataUtils {
     public static List<Person> persons(){
+        System.out.println("true = " + true);
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
                 PersonList personList = null;
