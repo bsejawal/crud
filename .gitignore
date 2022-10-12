@@ -20,6 +20,7 @@ target/
 *.iml
 *.ipr
 
+### Gradle
 .gradle
 gradle*
 **/build/
