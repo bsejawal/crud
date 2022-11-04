@@ -1,7 +1,8 @@
 spring boot crud with h2(in memory database)
 
 ## to accessing h2 in memory db
-`` http://localhost:8080/db ``
+`` http://localhost:8080/api/db ``
+`` jdbc URL: jdbc:h2:mem:testdb ``
 
 
 ### To Get All Person
