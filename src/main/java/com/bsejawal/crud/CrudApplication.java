@@ -2,13 +2,11 @@ package com.bsejawal.crud;
 
 import com.bsejawal.crud.model.User;
 import com.bsejawal.crud.repository.UserRepository;
-import com.bsejawal.crud.utils.DataUtils;
+import com.bsejawal.crud.util.DataUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class CrudApplication {

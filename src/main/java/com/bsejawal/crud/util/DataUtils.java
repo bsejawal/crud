@@ -1,4 +1,4 @@
-package com.bsejawal.crud.utils;
+package com.bsejawal.crud.util;
 
 import com.bsejawal.crud.payload.UserRegistrationDto;
 import com.bsejawal.crud.payload.vo.UserRegistrationDtoSet;
