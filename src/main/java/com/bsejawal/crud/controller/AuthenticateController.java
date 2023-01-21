@@ -1,10 +1,16 @@
 package com.bsejawal.crud.controller;
 
 import com.bsejawal.crud.payload.vo.AuthRequest;
+//import com.bsejawal.crud.util.JwtUtil;
+import com.bsejawal.crud.service.CustomUserDetailsService;
 import com.bsejawal.crud.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +21,43 @@ public class AuthenticateController {
     JwtUtil jwtUtil;
     @Autowired
     AuthenticationManager authenticationManager;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
 
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest) throws Exception{
         System.out.println("####### at /authenticate");
+        System.out.println("authRequest = " + authRequest);
+//        return "authenticated";
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
             System.out.println("######## authenticated successfully ");
         }catch (Exception e){
+            System.out.println("error "+ e.getMessage());
             throw new Exception("Invalid username/password");
         }
-        return jwtUtil.generateToken(authRequest.getUsername());
+//        return "success!!";
+        final UserDetails userDetails = userDetailsService
+                .loadUserByUsername(authRequest.getUsername());
+        return jwtUtil.generateToken(userDetails);
+    }
+
+    @GetMapping("/")
+    public String home(){
+        return "home";
+    }
+    @GetMapping("/authenticate")
+    public String authenticate(){
+        return "<h1>Welcome</h1>";
+    }
+    @GetMapping("/user")
+    public String user(){
+        return "<h1>Welcome User</h1>";
+    }
+    @GetMapping("/admin")
+    public String admin(){
+        return "<h1>Welcome Admin</h1>";
     }
 
 }

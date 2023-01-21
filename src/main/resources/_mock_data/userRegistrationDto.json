@@ -1,15 +1,11 @@
 {
   "userRegistrationDtoSet": [
     {
-      "username": "username",
+      "username": "user",
       "password": "badPass@123"
     },
     {
-      "username": "username0",
-      "password": "badPass@123"
-    },
-    {
-      "username": "username1",
+      "username": "admin",
       "password": "badPass@123"
     }
   ]

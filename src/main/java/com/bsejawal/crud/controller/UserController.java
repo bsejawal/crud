@@ -32,8 +32,8 @@ public class UserController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
     }
 
-    @GetMapping("/user")
-    public String user(){
-        return "welcome to user";
-    }
+//    @GetMapping("/user")
+//    public String user(){
+//        return "welcome to user";
+//    }
 }

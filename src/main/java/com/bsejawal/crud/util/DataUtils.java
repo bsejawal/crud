@@ -1,6 +1,8 @@
 package com.bsejawal.crud.util;
 
+import com.bsejawal.crud.payload.RoleRegistrationDto;
 import com.bsejawal.crud.payload.UserRegistrationDto;
+import com.bsejawal.crud.payload.vo.RoleRegistrationDtoSet;
 import com.bsejawal.crud.payload.vo.UserRegistrationDtoSet;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +24,7 @@ public class DataUtils {
         }catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println("t = " + t);
         return t;
     }
 
@@ -31,5 +34,10 @@ public class DataUtils {
     public static UserRegistrationDto getFirstUser(){
         return ((UserRegistrationDtoSet)readJsonFileToObject(FILE_BASE_PATH+"userRegistrationDto.json", UserRegistrationDtoSet.class)).getUserRegistrationDtoSet().stream().findFirst().get();
     }
-
+    public static Set<RoleRegistrationDto> loadRoles(){
+        return readJsonFileToObject(FILE_BASE_PATH+"roleRegistrationDto.json", RoleRegistrationDtoSet.class).getRoleRegistrationDtoSet();
+    }
+    public static RoleRegistrationDto getFirstRole(){
+        return ((RoleRegistrationDtoSet)readJsonFileToObject(FILE_BASE_PATH+"roleRegistrationDto.json", RoleRegistrationDtoSet.class)).getRoleRegistrationDtoSet().stream().findFirst().get();
+    }
 }

@@ -1,0 +1,10 @@
+{
+  "roleRegistrationDtoSet": [
+    {
+      "name": "ROLE_USER"
+    },
+    {
+      "username": "ROLE_ADMIN"
+    }
+  ]
+}

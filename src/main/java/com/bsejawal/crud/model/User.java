@@ -7,12 +7,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(
+        name = "users", // table name is users, to avoid conflict, as h2 database has keyword 'user' already
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"username"})
         }
@@ -33,16 +38,28 @@ public class User {
 //const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-//    )
-//    private Set<Role> roles;
-//
-//    private void setRoles(String roles){
-//    this.roles = Arrays.stream(roles.split(","))
-//            .map(Role::new)
-//                .collect(Collectors.toSet());
-//    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles = null;
+
+
+    public void setRole_s(String roles){
+        if(roles.contains(",")) {
+            roles = roles.replaceAll("\\s", "");
+            this.roles = Arrays.stream(roles.split(","))
+                    .map(Role::new)
+                    .collect(Collectors.toSet());
+        }else if(roles.contains(" ")){
+            roles =roles.trim();
+            this.roles = Arrays.stream(roles.split(" "))
+                    .map(Role::new)
+                    .collect(Collectors.toSet());
+
+        }else{
+            this.roles = new HashSet<>(Arrays.asList(new Role(roles)));
+        }
+    }
 
 }
