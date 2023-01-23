@@ -1,12 +1,9 @@
 package com.bsejawal.crud.controller;
 
 import com.bsejawal.crud.payload.vo.AuthRequest;
-//import com.bsejawal.crud.util.JwtUtil;
 import com.bsejawal.crud.service.CustomUserDetailsService;
 import com.bsejawal.crud.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
