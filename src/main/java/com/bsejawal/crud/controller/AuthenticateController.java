@@ -25,8 +25,6 @@ public class AuthenticateController {
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest) throws Exception{
         System.out.println("####### at /authenticate");
-        System.out.println("authRequest = " + authRequest);
-//        return "authenticated";
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
             System.out.println("######## authenticated successfully ");
@@ -34,7 +32,6 @@ public class AuthenticateController {
             System.out.println("error "+ e.getMessage());
             throw new Exception("Invalid username/password");
         }
-//        return "success!!";
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authRequest.getUsername());
         return jwtUtil.generateToken(userDetails);
