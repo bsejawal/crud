@@ -49,15 +49,15 @@ public class AuthenticateController {
     }
     @GetMapping("/authenticate")
     public String authenticate(){
-        return "<h1>Welcome</h1>";
+        return "authenticate get";
     }
     @GetMapping("/user")
     public String user(){
-        return "<h1>Welcome User</h1>";
+        return "Welcome User";
     }
     @GetMapping("/admin")
     public String admin(){
-        return "<h1>Welcome Admin</h1>";
+        return "Welcome Admin";
     }
 
 }
