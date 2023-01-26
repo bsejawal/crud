@@ -42,3 +42,7 @@ Windows : ctrl + alt + M
 11. Duplicate line
 Mac: cmd + D
 Windows: ctrl + D
+
+12. Navigate Back
+cmd + [ ;  AND Navigate Forward cmd + ]
+
