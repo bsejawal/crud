@@ -18,9 +18,8 @@ Windows: ctrl + 0 (zero)
 Mac: cmd + B
 Windows: ctrl + B
 
-6. Go back to previous file/line no
-Mac: cmd + [
-Windows: ctrl + alt + [
+6. Navigate Back
+cmd + [ ;  AND Navigate Forward cmd + ]
 
 7. Get Suggestion to import class(and many more)
 Mac: option + Enter
@@ -42,7 +41,4 @@ Windows : ctrl + alt + M
 11. Duplicate line
 Mac: cmd + D
 Windows: ctrl + D
-
-12. Navigate Back
-cmd + [ ;  AND Navigate Forward cmd + ]
 
