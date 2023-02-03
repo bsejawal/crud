@@ -1,7 +1,7 @@
 # Intellij Idea short-cut key cheat sheet
 | SN | Description | Mac Command | Windows Command |
 | -- | ----------- | ----------- | --------------- |
-| 1 | go to class | CMD + O | ctrl + N |
+| 1 | go to class | cmd + O | ctrl + N |
 | 2 | go to file | cmd + shift + O | ctrl + shift + N |
 | 3 | Open Project View in left side | cmd + 1 (one) | ctrl + 1 (one) |
 | 4 | Open VCS(Version Control eg: git changes list) | cmd + 0 (zero) | ctrl + 0 (zero) |
