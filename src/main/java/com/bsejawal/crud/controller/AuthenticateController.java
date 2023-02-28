@@ -1,9 +1,13 @@
 package com.bsejawal.crud.controller;
 
 import com.bsejawal.crud.payload.vo.AuthRequest;
+import com.bsejawal.crud.payload.vo.AuthResponse;
 import com.bsejawal.crud.service.CustomUserDetailsService;
 import com.bsejawal.crud.util.JwtUtil;
+import com.bsejawal.crud.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +27,7 @@ public class AuthenticateController {
 
 
     @PostMapping("/authenticate")
-    public String generateToken(@RequestBody AuthRequest authRequest) throws Exception{
-        System.out.println("####### at /authenticate");
+    public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest authRequest) throws Exception{
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
             System.out.println("######## authenticated successfully ");
@@ -34,7 +37,27 @@ public class AuthenticateController {
         }
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authRequest.getUsername());
-        return jwtUtil.generateToken(userDetails);
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwt(jwtUtil.generateToken(userDetails));
+        authResponse.setRoles(userDetails.getAuthorities().toString());
+        return new ResponseEntity<>(authResponse, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/refreshToken")
+    public ResponseEntity<AuthResponse> refreshToken (@RequestBody String jwt) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(jwtUtil.extractUsername(jwt));
+       if(!StringUtil.isEmpty(jwt) && jwtUtil.validateToken(jwt, userDetails)){
+
+           //TODO refresh token
+
+           AuthResponse authResponse = new AuthResponse();
+           authResponse.setJwt(jwt);
+           authResponse.setRoles(userDetails.getAuthorities().toString());
+           return new ResponseEntity<>(authResponse, HttpStatus.OK);
+       }
+       return (ResponseEntity<AuthResponse>) ResponseEntity.status(HttpStatus.UNAUTHORIZED);
+
     }
 
     @GetMapping("/")
