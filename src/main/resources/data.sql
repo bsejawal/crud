@@ -1,8 +1,9 @@
 INSERT INTO users (`username`, `password`)
 values
-('user','pwd'),
-('admin','pwd'),
-('bsejawal','pwd');
+--  second parameter is password "pwd" encrypted with BCryptPasswordEncoder algorithm
+('user','$2a$10$OL.rONYw3jqsDMD5qsQyWO5g2kL0cP.xpYjlkhWALfm3je.hL3icy'),
+('admin','$2a$10$OL.rONYw3jqsDMD5qsQyWO5g2kL0cP.xpYjlkhWALfm3je.hL3icy'),
+('bsejawal','$2a$10$OL.rONYw3jqsDMD5qsQyWO5g2kL0cP.xpYjlkhWALfm3je.hL3icy');
 
 INSERT INTO role (`name`)
 values
