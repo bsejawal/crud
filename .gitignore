@@ -5,6 +5,11 @@ target/
 !**/src/test/**
 *.DS_Store
 
+.gradle
+**/build/
+!src/**/build/
+out*
+
 ### STS ###
 .apt_generated
 .classpath
