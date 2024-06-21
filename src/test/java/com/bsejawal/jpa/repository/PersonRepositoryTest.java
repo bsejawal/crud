@@ -21,13 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PersonRepositoryTest {
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonRepository subject;
 
 
 
     @Test
     public void testInsert() throws Exception{
-        int result = personRepository.insert(
+        int result = subject.insert(
                 "123456789012345",
                 "John1",
                 "john@example.com",
@@ -57,8 +57,8 @@ class PersonRepositoryTest {
                         .dob(new SimpleDateFormat("MM/dd/yyyy").parse("07/28/1989"))
                         .build()
         );
-        personRepository.saveAll(persons);
-        List<Person> personsWithin30Days = personRepository.findAllByCreatedAtAfter(Instant.now().minus(Duration.ofDays(30)));
+        subject.saveAll(persons);
+        List<Person> personsWithin30Days = subject.findAllByCreatedAtAfter(Instant.now().minus(Duration.ofDays(30)));
         System.out.println("personsWithin30Days = " + personsWithin30Days);
         assertEquals(2, personsWithin30Days.size());
         assertEquals("John2", personsWithin30Days.get(0).getName());

@@ -3,8 +3,12 @@ package com.bsejawal.jpa.service;
 import com.bsejawal.jpa.dto.PersonDto;
 import com.bsejawal.jpa.entity.Person;
 import com.bsejawal.jpa.repository.PersonRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +25,46 @@ class PersonServiceTest {
 
     private PersonService subject = new PersonService(mockObjectMapper, mockPersonRepository);
 
+    @BeforeEach
+    void setup(){
+        MockitoAnnotations.initMocks(this);
 
+    }
+
+@Test
+void test_shouldCreate() throws JsonProcessingException {
+
+    // Arrange
+    String personId = "123456789012345";
+    String name = "John Doe";
+    String email = "john@example.com";
+    String phone = "1234567890";
+    String gender = "Male";
+
+    PersonDto personDto = PersonDto.builder()
+            .gender(gender)
+            .build();
+
+    // Mocking ObjectMapper behavior
+    when(mockObjectMapper.writeValueAsString(any())).thenReturn(gender);
+
+    // Act
+    subject.create(personId, name, email, phone, personDto);
+
+    // Assert
+    ArgumentCaptor<Person> argument = ArgumentCaptor.forClass(Person.class);
+    verify(mockPersonRepository).save(argument.capture());
+
+    Person capturedPerson = argument.getValue();
+    assertEquals(personId, capturedPerson.getPersonId());
+    assertEquals(name, capturedPerson.getName());
+    assertEquals(email, capturedPerson.getEmail());
+    assertEquals(phone, capturedPerson.getPhone());
+    assertEquals(gender, capturedPerson.getGender());
+
+
+
+}
     @Test
     void insert() {
 
