@@ -1,8 +1,12 @@
 package com.bsejawal.wiremock.service;
 
+import com.bsejawal.wiremock.vo.PostRequest;
 import com.bsejawal.wiremock.vo.PostResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -41,6 +45,26 @@ public class PostService {
             return responseList;
         } catch (RestClientException e) {
             logger.error("Error occurred while fetching the posts:", e);
+            return null;
+        }
+    }
+
+    public PostResponse savePost(PostRequest postRequest){
+        String resourceUrl = "https://jsonplaceholder.typicode.com/posts";
+
+        HttpEntity<PostRequest> request = new HttpEntity<PostRequest>(postRequest);
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            ResponseEntity<PostResponse> postResponseEntity =
+                    restTemplate
+                            .exchange(resourceUrl,
+                                    HttpMethod.POST,
+                                    request,
+                                    PostResponse.class);
+            logger.info("Response ####### = {}", postResponseEntity);
+            return postResponseEntity.getBody();
+        }catch (RestClientException e){
+            logger.error("error occurred while creating post :"+ postRequest);
             return null;
         }
 

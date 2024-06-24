@@ -1,13 +1,12 @@
 package com.bsejawal.wiremock.controller;
 
 import com.bsejawal.wiremock.service.PostService;
+import com.bsejawal.wiremock.vo.PostRequest;
 import com.bsejawal.wiremock.vo.PostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +28,11 @@ public class PostController {
         List<PostResponse> response =  postService.getAllPosts();
         System.out.println("response = " + response);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    @PostMapping("/posts")
+    public ResponseEntity<PostResponse> savePost(@RequestBody PostRequest postRequest){
+        PostResponse response = postService.savePost(postRequest);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
 }
