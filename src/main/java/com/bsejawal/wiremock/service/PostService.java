@@ -70,4 +70,24 @@ public class PostService {
 
     }
 
+    public PostResponse updatePost(int id, PostRequest postRequest) {
+        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/"+id;
+
+        HttpEntity<PostRequest> request = new HttpEntity<PostRequest>(postRequest);
+
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            ResponseEntity<PostResponse> postResponseEntity =
+                    restTemplate
+                            .exchange(resourceUrl,
+                                    HttpMethod.PUT,
+                                    request,
+                                    PostResponse.class);
+            logger.info("Response ####### = {}", postResponseEntity);
+            return postResponseEntity.getBody();
+        }catch (RestClientException e){
+            logger.error("error occurred while creating post :"+ postRequest);
+            return null;
+        }
+    }
 }
