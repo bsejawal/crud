@@ -1,10 +1,10 @@
-package com.bsejawal.wiremock;
+package com.bsejawal.resttemplate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WiremockApplicationTests {
+class RestTemplateApplicationTests {
 
 	@Test
 	void contextLoads() {

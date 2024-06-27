@@ -1,8 +1,8 @@
-package com.bsejawal.wiremock.controller;
+package com.bsejawal.resttemplate.controller;
 
-import com.bsejawal.wiremock.service.PostService;
-import com.bsejawal.wiremock.vo.PostRequest;
-import com.bsejawal.wiremock.vo.PostResponse;
+import com.bsejawal.resttemplate.service.PostService;
+import com.bsejawal.resttemplate.vo.PostRequest;
+import com.bsejawal.resttemplate.vo.PostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

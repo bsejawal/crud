@@ -1,13 +1,13 @@
-package com.bsejawal.wiremock;
+package com.bsejawal.resttemplate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WiremockApplication {
+public class RestTemplateApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WiremockApplication.class, args);
+		SpringApplication.run(RestTemplateApplication.class, args);
 	}
 
 }

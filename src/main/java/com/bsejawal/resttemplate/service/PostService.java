@@ -1,7 +1,7 @@
-package com.bsejawal.wiremock.service;
+package com.bsejawal.resttemplate.service;
 
-import com.bsejawal.wiremock.vo.PostRequest;
-import com.bsejawal.wiremock.vo.PostResponse;
+import com.bsejawal.resttemplate.vo.PostRequest;
+import com.bsejawal.resttemplate.vo.PostResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;

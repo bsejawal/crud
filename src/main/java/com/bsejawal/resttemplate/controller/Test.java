@@ -1,4 +1,4 @@
-package com.bsejawal.wiremock.controller;
+package com.bsejawal.resttemplate.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

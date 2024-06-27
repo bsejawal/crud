@@ -1,4 +1,4 @@
-package com.bsejawal.wiremock.vo;
+package com.bsejawal.resttemplate.vo;
 
 import lombok.*;
 
