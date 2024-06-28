@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: rest-template
+logging:
+  level:
+    org:
+      apache:
+        http: DEBUG
+
+jsonplaceholderBaseURL: https://jsonplaceholder.typicode.com/posts

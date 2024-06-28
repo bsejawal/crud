@@ -5,6 +5,7 @@ import com.bsejawal.resttemplate.vo.PostResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,8 @@ import java.util.List;
 
 @Service
 public class PostService {
+    @Value("${jsonplaceholderBaseURL}")
+    private String jsonPlaceholderBaseUrl;
     private static final Logger logger = LoggerFactory.getLogger(PostService.class);
 
     @Autowired
@@ -25,7 +28,7 @@ public class PostService {
 
 
     public PostResponse getPost(int id) {
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/" + id;
+        String resourceUrl = jsonPlaceholderBaseUrl+"/" + id;
 
         try {
             PostResponse response = restTemplate.getForObject(resourceUrl, PostResponse.class);
@@ -38,10 +41,9 @@ public class PostService {
     }
 
     public List<PostResponse> getAllPosts() {
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts";
 
         try {
-            PostResponse[] responseArray = restTemplate.getForObject(resourceUrl, PostResponse[].class);
+            PostResponse[] responseArray = restTemplate.getForObject(jsonPlaceholderBaseUrl, PostResponse[].class);
             List<PostResponse> responseList = Arrays.asList(responseArray);
 
             logger.info("ResponseList ####### = {}", responseList);
@@ -53,13 +55,12 @@ public class PostService {
     }
 
     public PostResponse savePost(PostRequest postRequest) {
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts";
 
         HttpEntity<PostRequest> request = new HttpEntity<PostRequest>(postRequest);
         try {
             ResponseEntity<PostResponse> postResponseEntity =
                     restTemplate
-                            .exchange(resourceUrl,
+                            .exchange(jsonPlaceholderBaseUrl,
                                     HttpMethod.POST,
                                     request,
                                     PostResponse.class);
@@ -73,7 +74,7 @@ public class PostService {
     }
 
     public PostResponse updatePost(int id, PostRequest postRequest) {
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/" + id;
+        String resourceUrl = jsonPlaceholderBaseUrl+"/" + id;
 
         HttpEntity<PostRequest> request = new HttpEntity<PostRequest>(postRequest);
 
@@ -93,7 +94,7 @@ public class PostService {
     }
 
     public ResponseEntity<PostResponse> sendPatchRequest(int id, PostRequest postRequest) {
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/" + id;
+        String resourceUrl = jsonPlaceholderBaseUrl+"/" + id;
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
