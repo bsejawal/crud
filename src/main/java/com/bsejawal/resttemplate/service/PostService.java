@@ -4,7 +4,9 @@ import com.bsejawal.resttemplate.vo.PostRequest;
 import com.bsejawal.resttemplate.vo.PostResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,23 +20,24 @@ import java.util.List;
 public class PostService {
     private static final Logger logger = LoggerFactory.getLogger(PostService.class);
 
+    @Autowired
+    RestTemplate restTemplate;
 
-    public PostResponse getPost(int id){
-        RestTemplate restTemplate = new RestTemplate();
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/"+id;
+
+    public PostResponse getPost(int id) {
+        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/" + id;
 
         try {
             PostResponse response = restTemplate.getForObject(resourceUrl, PostResponse.class);
             logger.info("Response ####### = {}", response);
             return response;
         } catch (RestClientException e) {
-            logger.error("Error occurred while fetching the post with id: "+id, e);
+            logger.error("Error occurred while fetching the post with id: " + id, e);
             return null;
         }
     }
 
-    public List<PostResponse> getAllPosts(){
-        RestTemplate restTemplate = new RestTemplate();
+    public List<PostResponse> getAllPosts() {
         String resourceUrl = "https://jsonplaceholder.typicode.com/posts";
 
         try {
@@ -49,11 +52,10 @@ public class PostService {
         }
     }
 
-    public PostResponse savePost(PostRequest postRequest){
+    public PostResponse savePost(PostRequest postRequest) {
         String resourceUrl = "https://jsonplaceholder.typicode.com/posts";
 
         HttpEntity<PostRequest> request = new HttpEntity<PostRequest>(postRequest);
-        RestTemplate restTemplate = new RestTemplate();
         try {
             ResponseEntity<PostResponse> postResponseEntity =
                     restTemplate
@@ -63,19 +65,18 @@ public class PostService {
                                     PostResponse.class);
             logger.info("Response ####### = {}", postResponseEntity);
             return postResponseEntity.getBody();
-        }catch (RestClientException e){
-            logger.error("error occurred while creating post :"+ postRequest);
+        } catch (RestClientException e) {
+            logger.error("error occurred while creating post :" + postRequest);
             return null;
         }
 
     }
 
     public PostResponse updatePost(int id, PostRequest postRequest) {
-        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/"+id;
+        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/" + id;
 
         HttpEntity<PostRequest> request = new HttpEntity<PostRequest>(postRequest);
 
-        RestTemplate restTemplate = new RestTemplate();
         try {
             ResponseEntity<PostResponse> postResponseEntity =
                     restTemplate
@@ -85,9 +86,21 @@ public class PostService {
                                     PostResponse.class);
             logger.info("Response ####### = {}", postResponseEntity);
             return postResponseEntity.getBody();
-        }catch (RestClientException e){
-            logger.error("error occurred while creating post :"+ postRequest);
+        } catch (RestClientException e) {
+            logger.error("error occurred while creating post :" + postRequest);
             return null;
         }
+    }
+
+    public ResponseEntity<PostResponse> sendPatchRequest(int id, PostRequest postRequest) {
+        String resourceUrl = "https://jsonplaceholder.typicode.com/posts/" + id;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        HttpEntity<PostRequest> requestEntity = new HttpEntity<>(postRequest, headers);
+        ResponseEntity<PostResponse> responseEntity = restTemplate.exchange(
+                resourceUrl, HttpMethod.PATCH, requestEntity, PostResponse.class
+        );
+        return responseEntity;
     }
 }

@@ -11,33 +11,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/posts")
 public class PostController {
 
     @Autowired
     PostService postService;
 
-    @GetMapping(value = "/posts/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<PostResponse> getPost(@PathVariable int id){
         PostResponse response =  postService.getPost(id);
         System.out.println("response = " + response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/posts")
+    @GetMapping
     public ResponseEntity<List<PostResponse>> getAllPost(){
         List<PostResponse> response =  postService.getAllPosts();
         System.out.println("response = " + response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    @PostMapping("/posts")
+    @PostMapping
     public ResponseEntity<PostResponse> savePost(@RequestBody PostRequest postRequest){
         PostResponse response = postService.savePost(postRequest);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PostResponse> update(@PathVariable int id, @RequestBody PostRequest postRequest){
         PostResponse response = postService.updatePost(id, postRequest);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<PostResponse> patchPost(@PathVariable int id, @RequestBody PostRequest postRequest){
+        ResponseEntity<PostResponse> response = postService.sendPatchRequest(id, postRequest);
+        return response;
     }
 }
