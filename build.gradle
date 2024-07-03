@@ -23,6 +23,8 @@ dependencies {
 	//The standard JDK HTTP library does not support HTTP PATCH. So I needed to use the Apache HttpComponents request factory.
 	implementation("org.apache.httpcomponents.client5:httpclient5")
 
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+
 	compileOnly 'org.projectlombok:lombok:1.18.32'
 	annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
