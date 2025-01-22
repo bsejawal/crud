@@ -1,13 +1,13 @@
-package com.bsejawal.resttemplate.controller;
+package com.bsejawal.dynamodb.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Test {
-
+public class TestController {
     @GetMapping("/test")
     public String test(){
-        return "test success";
+        return "test";
     }
+
 }

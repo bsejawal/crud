@@ -1,13 +1,13 @@
-package com.bsejawal.resttemplate;
+package com.bsejawal.dynamodb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestTemplateApplication {
+public class DynamodbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestTemplateApplication.class, args);
+		SpringApplication.run(DynamodbApplication.class, args);
 	}
 
 }

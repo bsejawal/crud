@@ -19,18 +19,20 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation ('com.amazonaws:aws-java-sdk-dynamodb:1.12.562'){
+		exclude(group: 'com.fasterxml.jackson.core')
+	}
 
-	//The standard JDK HTTP library does not support HTTP PATCH. So I needed to use the Apache HttpComponents request factory.
-	implementation("org.apache.httpcomponents.client5:httpclient5")
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
 
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
 	compileOnly 'org.projectlombok:lombok:1.18.32'
 	annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	testImplementation("com.github.tomakehurst:wiremock:3.0.1")
 }
 
 tasks.named('test') {
