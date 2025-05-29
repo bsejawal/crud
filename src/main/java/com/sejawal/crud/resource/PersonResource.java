@@ -3,7 +3,6 @@ package com.sejawal.crud.resource;
 import com.sejawal.crud.model.Person;
 import com.sejawal.crud.repository.PersonRepository;
 import com.sejawal.crud.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,13 +10,13 @@ import java.util.List;
 @RestController
 public class PersonResource {
 
-    @Autowired
     PersonService personService;
 
     private final PersonRepository personRepository;
 
-    PersonResource(PersonRepository personRepository){
+    PersonResource(PersonRepository personRepository, PersonService personService){
         this.personRepository = personRepository;
+        this.personService = personService;
     }
 
     @GetMapping(value = "/status")
@@ -41,7 +40,7 @@ public class PersonResource {
                     person.setAddress(newPerson.getAddress());
                     person.setName(newPerson.getName());
                     person.setEmail(newPerson.getEmail());
-                    return personRepository.save(newPerson);
+                    return personRepository.save(person);
                 }).orElseGet(() -> {
                     newPerson.setId(id);
                     return personRepository.save(newPerson);
