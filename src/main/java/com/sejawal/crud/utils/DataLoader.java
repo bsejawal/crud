@@ -29,7 +29,6 @@ public class DataLoader implements CommandLineRunner {
         List<PersonDto> personDtoList = loadFromJsonToPersonDto();
         List<Person> personList = new ArrayList<>();
         personDtoList.forEach(person -> personList.add(PersonMapper.mapToPerson(person, new Person())));
-        System.out.println("personList size: "+personList.size());
         personRepository.saveAll(personList);
     }
 
