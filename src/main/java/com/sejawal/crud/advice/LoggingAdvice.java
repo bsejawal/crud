@@ -15,7 +15,7 @@ public class LoggingAdvice {
 
     Logger log = org.slf4j.LoggerFactory.getLogger(LoggingAdvice.class);
 
-    //first * is for all packages after 'crud', second * is for all classes, third * is for all methods
+    //first * is for all packages after 'crud' package, second * is for all classes, third * is for all methods
     @Pointcut(value = "execution(* com.sejawal.crud.*.*.*(..))")
     public void myPointcut() {
     }

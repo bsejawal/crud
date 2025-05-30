@@ -1,6 +1,7 @@
 package com.sejawal.crud.model;
 
 
+import com.sejawal.crud.dto.PersonDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

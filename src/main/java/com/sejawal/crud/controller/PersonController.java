@@ -1,11 +1,14 @@
 package com.sejawal.crud.controller;
 
+import com.sejawal.crud.annotation.TrackExecutionTime;
+import com.sejawal.crud.dto.PersonDto;
 import com.sejawal.crud.model.Person;
 import com.sejawal.crud.repository.PersonRepository;
 import com.sejawal.crud.service.PersonService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PersonController {
@@ -19,11 +22,14 @@ public class PersonController {
         this.personService = personService;
     }
 
+
     @GetMapping(value = "/status")
     public String status(){
         System.out.println("called /status");
         return "if you see this the app is working fine, celebrate!!";
     }
+
+    @TrackExecutionTime
     @GetMapping(value = "/persons")
     public List<Person> all(){
         return (List<Person>) personRepository.findAll();
@@ -46,6 +52,11 @@ public class PersonController {
                     return personRepository.save(newPerson);
                 });
     }
+    @PatchMapping(value = "/persons/{id}")
+    public PersonDto updatePersonFields(@PathVariable long id, @RequestBody Map<String, Object> fields){
+        return personService.updatePersonFields(id, fields);
+    }
+
     @DeleteMapping(value = "/persons/{id}")
     public void delete(@PathVariable(name = "id") Long id){
         personRepository.deleteById(id);
@@ -55,7 +66,6 @@ public class PersonController {
     public Person add(@RequestBody Person person){
         personRepository.save(person);
         return person;
-
     }
     @RequestMapping(value = "/test")
     public String test(){
