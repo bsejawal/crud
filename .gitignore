@@ -21,3 +21,5 @@ target/
 *.ipr
 .gradle
 build/
+.obsidian
+src/test/java/com/sejawal/crud/contract/
